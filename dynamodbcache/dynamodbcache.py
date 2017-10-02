@@ -13,6 +13,10 @@ from werkzeug.contrib.cache import BaseCache
 
 DynamoDBAttribute = namedtuple('DynamoDBAttribute', ('name', 'data_type'))
 
+def dynamodbcache(app, config, args, kwargs):
+    """Auxiliary function to be used in results backend in Celery"""
+    return DynamodDbCache(*args, **kwargs)
+
 class DynamodDbCache(BaseCache):
 
     """Uses AWS Dynamo Db table as a cache backend.
