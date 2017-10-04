@@ -248,7 +248,6 @@ class DynamodDbCache(BaseCache):
 
     def set(self, key, value, timeout=None):
         try:
-            logging.info("Value: %s",value)
             self.client.put_item(**self._prepare_put_request(str(key), self.dump_object(value), time(), timeout, True))
         except Exception as e:
             logging.info('Error adding object to DynamoDB table %s : %s',self.table_name,e)
